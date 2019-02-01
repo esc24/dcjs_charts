@@ -1,6 +1,6 @@
 // import a CSS module
-import classes from './main.css';
+import './main.css';
 
 export default () => {
-    console.log(classes.other);
+    document.getElementById('message').innerText = "Hello World!";
 };
