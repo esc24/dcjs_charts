@@ -15,10 +15,10 @@ var data = [
     { date: '2011-11-14T17:29:52Z', quantity: 1, total: 200, tip: 100, type: 'visa' }
 ];
 
-function printFilter (f) {
-    if (typeof (f.length) != 'undefined') { } else { }
-    if (typeof (f.top) != 'undefined') { f = f.top(Infinity); } else { }
-    if (typeof (f.dimension) != 'undefined') { f = f.dimension(function (d) { return ''; }).top(Infinity); } else { }
+export function printFilter (f) {
+    if (typeof (f.length) !== 'undefined') { } else { }
+    if (typeof (f.top) !== 'undefined') { f = f.top(Infinity); } else { }
+    if (typeof (f.dimension) !== 'undefined') { f = f.dimension(function (d) { return ''; }).top(Infinity); } else { }
     console.log('filter' + '(' + f.length + ') = ' + JSON.stringify(f).replace('[', '[\n\t').replace(/}\,/g, '},\n\t').replace(']', '\n]'));
 }
 

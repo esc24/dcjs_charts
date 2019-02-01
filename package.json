@@ -10,7 +10,9 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "crossfilter": "^1.3.12"
+    "crossfilter": "^1.3.12",
+    "d3": "^5.8.0",
+    "dc": "^2.2.2"
   },
   "devDependencies": {
     "eslint": "^5.12.1",
