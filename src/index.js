@@ -1,6 +1,6 @@
 // import another component
 import main from './main';
-import dataSetup from './dcfun';
+import calcTotal from './dcfun';
 
 main();
-dataSetup();
+calcTotal();
