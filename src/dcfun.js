@@ -33,13 +33,20 @@ function calcTotal () {
     // Apply one or more cumulative filters.
     totalDim.filter([0, 100]);
     typeDim.filter('tab');
-    //typeDim.filter('cash');
-    //printFilter(filter);
     printFilter(ndx);
 
     // Calculate total via reduce on groupAll.
     var total = ndx.groupAll().reduceSum(d => d.total).value();
-    console.log(`Filtered total = ${total}`);
+    console.log(`Filtered total (tab < 100) = ${total}`);
+
+    // Clear filters and apply a new one
+    typeDim.filterAll();
+    totalDim.filterAll();
+    printFilter(ndx);
+    typeDim.filter(d => { if (d === 'cash' || d === 'visa') { return d } });
+    printFilter(ndx);
+    total = ndx.groupAll().reduceSum(d => d.total).value();
+    console.log(`Filtered total (cash and visa) = ${total}`);
 }
 
 export default calcTotal;
