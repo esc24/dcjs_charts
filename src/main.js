@@ -2,5 +2,5 @@
 import './main.css';
 
 export default () => {
-    document.getElementById('message').innerText = "Hello World!";
+    document.getElementById('message').innerText = 'Hello World!';
 };

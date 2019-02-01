@@ -1,12 +1,11 @@
 import crossfilter from 'crossfilter';
 
 function dataSetup () {
-    function print_filter (filter) {
-        var f = eval(filter);
+    function printFilter (f) {
         if (typeof (f.length) != 'undefined') { } else { }
         if (typeof (f.top) != 'undefined') { f = f.top(Infinity); } else { }
         if (typeof (f.dimension) != 'undefined') { f = f.dimension(function (d) { return ''; }).top(Infinity); } else { }
-        console.log(filter + '(' + f.length + ') = ' + JSON.stringify(f).replace('[', '[\n\t').replace(/}\,/g, '},\n\t').replace(']', '\n]'));
+        console.log('filter' + '(' + f.length + ') = ' + JSON.stringify(f).replace('[', '[\n\t').replace(/}\,/g, '},\n\t').replace(']', '\n]'));
     }
     var data = [
         { date: '2011-11-14T16:17:54Z', quantity: 2, total: 190, tip: 100, type: 'tab' },
@@ -24,10 +23,18 @@ function dataSetup () {
     ];
 
     var ndx = crossfilter(data);
-    var totalDim = ndx.dimension(function (d) { return d.total; });
-    var total_90 = totalDim.filter(90);
+    printFilter(ndx);
 
-    print_filter('total_90');
+    var totalDim = ndx.dimension(d => d.total);
+    var typeDim = ndx.dimension(d => d.type);
+
+    //var filter = totalDim.filter(d => { if (d % 3 === 0) { return d; } });
+    var filter = typeDim.filter('visa');
+    //var filter = typeDim.filter('cash');
+    printFilter(filter);
+
+    var total = ndx.groupAll().reduceSum(d => d.total).value();
+    console.log(`Filtered total = ${total}`);
 }
 
 export default dataSetup;
